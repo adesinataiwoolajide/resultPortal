@@ -3,7 +3,8 @@
 	require("../Dev/general/all_purpose_class.php");
 	include_once("../connection/connection.php");
     require('../Dev/Database.php');
-    require('../Dev/User.php');
+    require('../Dev/autoload.php');
+    
     $user = new User();
 	try{
         $db = Database::getInstance()->getConnection();

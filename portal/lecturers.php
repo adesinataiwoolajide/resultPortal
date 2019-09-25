@@ -12,7 +12,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="./">Home</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="Lecturers.php">Lecturers</a>
+                            <li class="breadcrumb-item"><a href="lecturers.php">Lecturers</a>
                             </li>
                             <li class="breadcrumb-item active">List of All Saved Lecturers
                             </li>
@@ -32,29 +32,30 @@
                                 <div class="card-content">
                                     <div class="card-body">
                                         
-                                        <form action="" method="POST" enctype="multipart/form-data">
+                                        <form action="process-lecturer.php" method="POST" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                     <fieldset class="form-group">
-                                                        <label for="roundText">Full Name</label>
-                                                        <input type="text" id="roundText" class="form-control round" name="full_name" placeholder="Enter The Full Name" required>
+                                                        <label for="roundText"> Lecturer Full Name</label>
+                                                        <input type="text" id="roundText" class="form-control round" name="name" placeholder="Enter The Full Name" required>
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                     <fieldset class="form-group">
-                                                        <label for="roundText">E-Mail</label>
+                                                        <label for="roundText">Lecturer E-Mail</label>
                                                         <input type="email" id="roundText" class="form-control round" placeholder="Enter The E-mail" name="email" required>
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                     <fieldset class="form-group">
-                                                        <label for="roundText">Phone Number</label>
-                                                        <input type="number" id="roundText" class="form-control round" placeholder="Enter Phone Number" required name="phone_number">
+                                                        <label for="roundText">Lecturer Phone Number</label>
+                                                        <input type="number" id="roundText" class="form-control round" placeholder="Enter Phone Number" required 
+                                                        name="phone_number" maxlength="11">
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                     <fieldset class="form-group">
-                                                        <label for="roundText">Password</label>
+                                                        <label for="roundText"> Password</label>
                                                         <input type="password" id="roundText" class="form-control round" name="password" placeholder="Enter The Password" required>
                                                     </fieldset>
                                                 </div>
@@ -98,24 +99,27 @@
                                                     <th>S/N</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
+                                                    <th>Staff Number</th>
                                                     <th>Phone Number</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Adesina Taiwo</td>
-                                                    <td>taiwo@gmail.com</td>
-                                                    <td>08138139333</td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Akinsola Goke</td>
-                                                    <td>goke@gmail.com</td>
-                                                    <td>081526252652</td>
-                                                    
-                                                </tr>
+                                            <tbody><?php 
+                                                $num =1;
+                                                foreach($staff->getAllstaffs() as $staffs){ ?>
+                                                    <tr>
+                                                        <td><?php echo $num ?>
+                                                            <a href="delete-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-danger" onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a>
+                                                            <a href="edit-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-success" onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a>
+                                                        </td>
+                                                        <td><?php echo $staffs['staff_name'] ?></td>
+                                                        <td><?php echo $staffs['staff_email'] ?></td>
+                                                        <td><?php echo $staffs['staff_number'] ?></td>
+                                                        <td><?php echo $staffs['phone_number'] ?></td>
+                                                        
+                                                    </tr><?php 
+                                                    $num++; 
+                                                } ?>
+                                               
                                                 
                                             </tbody>
                                             <tfoot>
@@ -123,6 +127,7 @@
                                                     <th>S/N</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
+                                                    <th>Staff Number</th>
                                                     <th>Phone Number</th>
                                                 </tr>
                                             </tfoot>

@@ -14,7 +14,7 @@
 			}
         }
 
-        public function checkStudentstudent_email($student_email)
+        public function checkStudentstudentEmail($student_email)
 		{
 			$db = Database::getInstance()->getConnection();
 			$query = $db->prepare("SELECT * FROM students WHERE student_email=:student_email");
@@ -40,7 +40,7 @@
 			}
         }
         
-        public function addStudent($matric_number, $phone_number, $student_email, $student_name,$level, $program)
+        public function addStudent($student_name, $student_email, $matric_number, $phone_number,  $level, $program)
         {
             $db = Database::getInstance()->getConnection();
             $query = $db->prepare("INSERT INTO students(student_name, student_email, matric_number, phone_number, level, program)VALUES
@@ -61,7 +61,8 @@
         public function updateStudent($matric_number, $phone_number, $student_email, $student_name,$level, $program)
         {
             $db = Database::getInstance()->getConnection();
-            $query = $db->prepare("UPDATE students SET student_name=:student_name, student_email=:student_email, phone_number=:phone_number, level=:level, program=:program WHERE matric_number=:matric_number)");
+            $query = $db->prepare("UPDATE students SET student_name=:student_name, student_email=:student_email, 
+            phone_number=:phone_number, level=:level, program=:program WHERE matric_number=:matric_number");
             $query->bindValue(":matric_number", $matric_number);
             $query->bindValue(":student_email", $student_email);
             $query->bindValue(":student_name", $student_name);

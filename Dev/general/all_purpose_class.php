@@ -57,7 +57,15 @@
 				$nn= $this->operationHistory($action, $eemail);
 				$_SESSION['success'] = $_SESSION['name']. " ". "Welcome to Admin Dashboard";
 				$this->redirect("portal/./");
-			
+			}elseif($access == 'Lecturer'){
+				$nn= $this->operationHistory($action, $eemail);
+				$_SESSION['success'] = $_SESSION['name']. " ". "Welcome to Leturer Dashboard";
+				$this->redirect("portal/./");
+			}elseif($access){
+				$nn= $this->operationHistory($action, $eemail);
+				$_SESSION['success'] = $_SESSION['name']. " ". "Welcome to Student Dashboard";
+				$this->redirect("portal/./");
+
 			}else{
 				$_SESSION['error'] = "Your are an Invalid User";
 				$this->redirect(".././");

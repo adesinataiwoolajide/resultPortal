@@ -3,7 +3,8 @@
 	require("../Dev/general/all_purpose_class.php");
 	include_once("../connection/connection.php");
     require('../Dev/Database.php');
-    require('../Dev/User.php');
+    require('../Dev/autoload.php');
+    
     $all_purpose = new all_purpose($db);
     $user = new User();
 	try{

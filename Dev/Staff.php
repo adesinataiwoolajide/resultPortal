@@ -14,7 +14,7 @@
 			}
         }
 
-        public function checkStaffstaff_email($staff_email)
+        public function checkStaffstaffEmail($staff_email)
 		{
 			$db = Database::getInstance()->getConnection();
 			$query = $db->prepare("SELECT * FROM staffs WHERE staff_email=:staff_email");
@@ -60,7 +60,7 @@
         public function updateStaff($staff_number, $phone_number, $staff_email, $staff_name)
         {
             $db = Database::getInstance()->getConnection();
-            $query = $db->prepare("UPDATE staffs SET staff_name=:staff_name, staff_email=:staff_email, phone_number=:phone_number WHERE staff_number=:staff_number)");
+            $query = $db->prepare("UPDATE staffs SET staff_name=:staff_name, staff_email=:staff_email, phone_number=:phone_number WHERE staff_number=:staff_number");
             $query->bindValue(":staff_number", $staff_number);
             $query->bindValue(":staff_email", $staff_email);
             $query->bindValue(":staff_name", $staff_name);
@@ -72,6 +72,7 @@
                 return false;
             }
         }
+        
 
         public function deleteStaff($staff_number)
 		{

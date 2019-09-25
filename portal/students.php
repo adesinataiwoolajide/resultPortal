@@ -32,7 +32,7 @@
                                 <div class="card-content">
                                     <div class="card-body">
                                         
-                                        <form action="" method="POST" enctype="multipart/form-data">
+                                        <form action="process-student.php" method="POST" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                                     <fieldset class="form-group">
@@ -43,7 +43,7 @@
                                                 
                                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
                                                 <label for="roundText">Submit The Excel File</label>
-                                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-user">UPLOAD THE STUDENTS RECORD</button>
+                                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-student">UPLOAD THE STUDENTS RECORD</button>
                                                 </div>
                                            
                                             
@@ -86,27 +86,28 @@
                                                     <th>Program</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Adeola Joke</td>
-                                                    <td>171646</td>
-                                                    <td>joke@gmail.com</td>
-                                                    <td>09074746473</td>
-                                                    <td>ND 1</td>
-                                                    <td>Full Time</td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Jibola Hammmed</td>
-                                                    <td>171326</td>
-                                                    <td>jibola@gmail.com</td>
-                                                    <td>090745393033</td>
-                                                    <td>ND 2</td>
-                                                    <td>Full Time</td>
-                                                    
-                                                </tr>
+                                            <tbody><?php 
+                                                $num =1;
+                                                foreach($student->getAllstudents() as $students){ ?>
+
+                                                    <tr>
+                                                        <td><?php echo $num ?>
+                                                        <a href="delete-student.php?matric_number=<?php echo $students['matric_number'] ?>" class="btn btn-danger" 
+                                                            onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a>
+                                                        <!-- <a href="edit-student.php?matric_number=<?php echo $students['matric_number'] ?>" class="btn btn-success" 
+                                                            onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a> -->
+                                                        </td>
+                                                        <td><?php echo $students['student_name']; ?></td>
+                                                        <td><?php echo $students['matric_number']; ?></td>
+                                                        <td><?php echo $students['student_email']; ?></td>
+                                                        <td><?php echo $students['phone_number']; ?></td>
+                                                        <td><?php echo $students['level']; ?></td>
+                                                        <td><?php echo $students['program']; ?></td>
+                                                        
+                                                    </tr><?php 
+                                                    $num++;
+                                                } ?>
+                                                
                                                 
                                             </tbody>
                                             <tfoot>

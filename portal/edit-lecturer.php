@@ -1,6 +1,11 @@
 <?php
     require_once('header.php');
     require_once('sidebar.php');
+    $staff_number = $_GET['staff_number']; 
+    $details = $staff->getSingleStaff($staff_number);
+    $email = $details['staff_email'];
+    $userDetails = $user->getSingleUser($email);
+    $user_id = $userDetails['user_id'];
 ?>
     <div class="app-content content">
         <div class="content-wrapper">
@@ -12,9 +17,11 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="./">Home</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="courses.php">Courses</a>
+                            <li class="breadcrumb-item"><a href="edit-lecturer.php?staff_number=<?php echo $staff_number ?>">Edit Lecturer</a>
                             </li>
-                            <li class="breadcrumb-item active">List of All Saved Departmental Courses
+                            <li class="breadcrumb-item"><a href="lecturers.php">Lecturers</a>
+                            </li>
+                            <li class="breadcrumb-item active">List of All Saved Lecturers
                             </li>
                         </ol>
                     </div>
@@ -27,57 +34,51 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Departmental Course Registration Form</h4>
+                                    <h4 class="card-title">Edit Lecturer Details</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form action="process-course.php" method="POST" enctype="multipart/form-data">
+                                        
+                                        <form action="update_lecturer.php" method="POST" enctype="multipart/form-data">
                                             <div class="row">
-                                            
                                                 <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                     <fieldset class="form-group">
-                                                        <label for="roundText">Course Title</label>
-                                                        <input type="text" id="roundText" class="form-control round" name="course_title" 
-                                                        placeholder="Enter The Course Title" 
-                                                        required>
+                                                        <label for="roundText"> Lecturer Full Name</label>
+                                                        <input type="text" id="roundText" class="form-control round" name="name" placeholder="Enter The Full Name" 
+                                                        required value="<?php echo $details['staff_name'] ?>">
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                     <fieldset class="form-group">
-                                                        <label for="roundText">Course Code</label>
-                                                        <input type="text" id="roundText" class="form-control round" placeholder="Enter The Course Code" 
-                                                        name="course_code" 
-                                                        required maxlength="7">
+                                                        <label for="roundText">Lecturer E-Mail</label>
+                                                        <input type="email" id="roundText" class="form-control round" placeholder="Enter The E-mail" name="email" required
+                                                        value="<?php echo $details['staff_email'] ?>" >
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                     <fieldset class="form-group">
-                                                        <label for="roundText">Course Unit</label>
-                                                        <input type="number" id="roundText" class="form-control round" name="course_unit" 
-                                                        placeholder="Enter The Course Unit" required maxlength="2">
+                                                        <label for="roundText">Lecturer Phone Number</label>
+                                                        <input type="number" id="roundText" class="form-control round" placeholder="Enter Phone Number" required 
+                                                        name="phone_number" maxlength="11" value="<?php echo $details['phone_number'] ?>">
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                     <fieldset class="form-group">
-                                                        <label for="roundText">Course Status</label>
-                                                        
-                                                        <select id="roundText" class="form-control round" name="status">
-                                                            <option> -- Select The Status -- </option>
-                                                            <option></option><?php
-                                                            $status = array('Core', 'Required', 'Elective'); 
-                                                            foreach($status as $positions){ ?>
-                                                                <option value="<?php echo $positions ?>"> <?php echo $positions ?>  </option><?php
-                                                            } ?>
-                                                        </select>
+                                                        <label for="roundText"> Staff Number</label>
+                                                        <input type="text" id="roundText" class="form-control round" name="staff_number" readonly value="<?php echo $staff_number ?>">
                                                     </fieldset>
                                                 </div>
 
+                                            
+                                                <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
+                                                <!-- <input type="text" name="password" value="<?php echo $userDetails['password'] ?>"> -->
+
                                                 <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
-                                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-course">ADD THE COURSE</button>
+                                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-user">UPDATE THE LECTURER</button>
                                                 </div>
+                                           
                                             
-                                            
-                                            </div>
+                                            </div> 
                                         </form>
                                     </div>
                                 </div>
@@ -91,7 +92,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">List of All Saved Departmental COurses</h4>
+                                    <h4 class="card-title">List of All Saved Lecturers</h4>
                                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -103,47 +104,46 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                        
                                         <table class="table table-striped table-bordered zero-configuration">
                                             <thead>
                                                 <tr>
                                                     <th>S/N</th>
-                                                    <th>Course Title</th>
-                                                    <th>Course Code</th>
-                                                    <th>Course Unit</th>
-                                                    <th>Course Status</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Staff Number</th>
+                                                    <th>Phone Number</th>
                                                 </tr>
                                             </thead>
-                                            <tbody><?php
+                                            <tbody><?php 
                                                 $num =1;
-                                                foreach($course::getAllCourses() as $courses){?>
+                                                foreach($staff->getAllstaffs() as $staffs){ ?>
                                                     <tr>
                                                         <td><?php echo $num ?>
-                                                            <a href="delete-course.php?course_code=<?php echo $courses['course_code'] ?>" class="btn btn-danger" onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a>
-                                                            <a href="edit-course.php?course_id=<?php echo $courses['course_id'] ?>" class="btn btn-success" onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a>
-												
-                                                        
+                                                            <a href="delete-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-danger" onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a>
+                                                            <a href="edit-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-success" onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a>
                                                         </td>
-                                                        <td><?php echo $courses['course_title'] ?></td>
-                                                        <td><?php echo $courses['course_code'] ?></td>
-                                                        <td><?php echo $courses['course_unit'] ?></td>
-                                                        <td><?php echo $courses['course_status'] ?></td>
+                                                        <td><?php echo $staffs['staff_name'] ?></td>
+                                                        <td><?php echo $staffs['staff_email'] ?></td>
+                                                        <td><?php echo $staffs['staff_number'] ?></td>
+                                                        <td><?php echo $staffs['phone_number'] ?></td>
                                                         
                                                     </tr><?php 
-                                                    $num++;
+                                                    $num++; 
                                                 } ?>
+                                               
                                                 
                                             </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <th>S/N</th>
-                                                    <th>Course Title</th>
-                                                    <th>Course Code</th>
-                                                    <th>Course Unit</th>
-                                                    <th>Course Status</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Staff Number</th>
+                                                    <th>Phone Number</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                       
                                     </div>
                                 </div>
                             </div>

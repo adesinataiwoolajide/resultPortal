@@ -7,9 +7,11 @@ if(!isset($_SESSION['id'])){
   require("../Dev/general/all_purpose_class.php");
 	
   require('../Dev/Database.php');
-  require('../Dev/User.php');
+  // require('../Dev/User.php');
   $course = new course();
   $user = new User();
+  $staff = new Staff();
+  $student = new Student();
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">

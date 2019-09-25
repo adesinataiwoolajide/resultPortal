@@ -68,6 +68,21 @@
             }
         }
 
+        public function updateUserLectuere($role,$name, $email, $user_id)
+        {
+            $db = Database::getInstance()->getConnection();
+            $query= $db->prepare("UPDATE administrator SET name=:name, email=:email, role=:role WHERE user_id=:user_id");
+            $query->bindValue(":name", $name);
+            $query->bindValue(":email", $email);
+            $query->bindValue(":role", $role);
+            $query->bindValue(":user_id", $user_id);
+            if(!empty($query->execute())){
+				return true;
+			}else{
+                return false;
+            }
+        }
+
         public function userLogin($email, $password)
         {
             $db= Database::getInstance()->getConnection();

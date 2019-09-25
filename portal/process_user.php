@@ -1,9 +1,9 @@
 <?php
 	session_start();
 	require("../Dev/general/all_purpose_class.php");
-	include_once("../connection/connection.php");
+    include_once("../connection/connection.php");
+    require('../Dev/autoload.php');
     require('../Dev/Database.php');
-    require('../Dev/User.php');
     
     $user = new User();
 	try{
