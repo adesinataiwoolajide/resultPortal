@@ -106,6 +106,15 @@
 			return $query->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function getSingleStudentEmail($email)
+		{
+			$db = Database::getInstance()->getConnection();
+            $query = $db->prepare("SELECT * FROM students WHERE student_email=:email");
+            $query->bindValue(":email", $email);
+			$query->execute();
+			return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         public function getSingleStudent($matric_number)
 		{
 			$db = Database::getInstance()->getConnection();

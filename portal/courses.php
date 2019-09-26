@@ -21,71 +21,73 @@
                     </div>
                 </div>
             </div>
-            <div class="content-body"><!-- Stats -->
-                <section class="basic-elements">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Departmental Course Registration Form</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <form action="process-course.php" method="POST" enctype="multipart/form-data">
-                                            <div class="row">
-                                            
-                                                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
-                                                    <fieldset class="form-group">
-                                                        <label for="roundText">Course Title</label>
-                                                        <input type="text" id="roundText" class="form-control round" name="course_title" 
-                                                        placeholder="Enter The Course Title" 
-                                                        required>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
-                                                    <fieldset class="form-group">
-                                                        <label for="roundText">Course Code</label>
-                                                        <input type="text" id="roundText" class="form-control round" placeholder="Enter The Course Code" 
-                                                        name="course_code" 
-                                                        required maxlength="7">
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
-                                                    <fieldset class="form-group">
-                                                        <label for="roundText">Course Unit</label>
-                                                        <input type="number" id="roundText" class="form-control round" name="course_unit" 
-                                                        placeholder="Enter The Course Unit" required maxlength="2">
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
-                                                    <fieldset class="form-group">
-                                                        <label for="roundText">Course Status</label>
-                                                        
-                                                        <select id="roundText" class="form-control round" name="status">
-                                                            <option> -- Select The Status -- </option>
-                                                            <option></option><?php
-                                                            $status = array('Core', 'Required', 'Elective'); 
-                                                            foreach($status as $positions){ ?>
-                                                                <option value="<?php echo $positions ?>"> <?php echo $positions ?>  </option><?php
-                                                            } ?>
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-
-                                                <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
-                                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-course">ADD THE COURSE</button>
-                                                </div>
-                                            
-                                            
-                                            </div>
-                                        </form>
+            <div class="content-body"><!-- Stats --><?php 
+                if($role == 'Admin'){ ?>
+                    <section class="basic-elements">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Departmental Course Registration Form</h4>
                                     </div>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <form action="process-course.php" method="POST" enctype="multipart/form-data">
+                                                <div class="row">
+                                                
+                                                    <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                            <label for="roundText">Course Title</label>
+                                                            <input type="text" id="roundText" class="form-control round" name="course_title" 
+                                                            placeholder="Enter The Course Title" 
+                                                            required>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                            <label for="roundText">Course Code</label>
+                                                            <input type="text" id="roundText" class="form-control round" placeholder="Enter The Course Code" 
+                                                            name="course_code" 
+                                                            required maxlength="7">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                            <label for="roundText">Course Unit</label>
+                                                            <input type="number" id="roundText" class="form-control round" name="course_unit" 
+                                                            placeholder="Enter The Course Unit" required maxlength="2">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                            <label for="roundText">Course Status</label>
+                                                            
+                                                            <select id="roundText" class="form-control round" name="status">
+                                                                <option> -- Select The Status -- </option>
+                                                                <option></option><?php
+                                                                $status = array('Core', 'Required', 'Elective'); 
+                                                                foreach($status as $positions){ ?>
+                                                                    <option value="<?php echo $positions ?>"> <?php echo $positions ?>  </option><?php
+                                                                } ?>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                                        <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-course">ADD THE COURSE</button>
+                                                    </div>
+                                                
+                                                
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
-                                
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section><?php 
+                } ?>
                 <section id="configuration">
                     <div class="row">
                         <div class="col-12">
@@ -117,10 +119,12 @@
                                                 $num =1;
                                                 foreach($course::getAllCourses() as $courses){?>
                                                     <tr>
-                                                        <td><?php echo $num ?>
-                                                            <a href="delete-course.php?course_code=<?php echo $courses['course_code'] ?>" class="btn btn-danger" onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a>
-                                                            <a href="edit-course.php?course_id=<?php echo $courses['course_id'] ?>" class="btn btn-success" onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a>
-												
+                                                        <td><?php echo $num;
+                                                            if($role == 'Admin'){ ?>
+                                                                <a href="delete-course.php?course_code=<?php echo $courses['course_code'] ?>" class="btn btn-danger" onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a>
+                                                                <a href="edit-course.php?course_id=<?php echo $courses['course_id'] ?>" class="btn btn-success" 
+                                                                onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a><?php
+                                                            } ?>
                                                         
                                                         </td>
                                                         <td><?php echo $courses['course_title'] ?></td>

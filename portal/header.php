@@ -4,14 +4,16 @@ if(!isset($_SESSION['id'])){
     $_SESSION['error'] = "Please Login with Your Details";
     header('Location: .././');
 }
-  require("../Dev/general/all_purpose_class.php");
-	
-  require('../Dev/Database.php');
-  // require('../Dev/User.php');
-  $course = new course();
-  $user = new User();
-  $staff = new Staff();
-  $student = new Student();
+	require("../Dev/general/all_purpose_class.php");
+		
+	require('../Dev/Database.php');
+	// require('../Dev/User.php');
+	$course = new course();
+	$user = new User();
+	$staff = new Staff();
+	$student = new Student();
+	$role = $_SESSION['role'];
+
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">

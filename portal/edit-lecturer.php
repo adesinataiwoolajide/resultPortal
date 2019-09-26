@@ -17,11 +17,29 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="./">Home</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="edit-lecturer.php?staff_number=<?php echo $staff_number ?>">Edit Lecturer</a>
+                            <li class="breadcrumb-item"><a href="edit-lecturer.php?staff_number=<?php echo $staff_number ?>">Edit 
+                                <?php if($role == 'Lecturer'){  ?>
+                                    My Details <?php
+                                }else{ ?>
+                                    Lecturer <?php
+                                } ?>
+                            </a>
                             </li>
-                            <li class="breadcrumb-item"><a href="lecturers.php">Lecturers</a>
+                            <li class="breadcrumb-item"><a href="lecturers.php"><?php 
+                                if($role == 'Admin'){ ?>
+                                    
+                                    Lecturers <?php
+                                }else{ ?>
+                                    My Details  <?php
+                                } ?></a>
                             </li>
-                            <li class="breadcrumb-item active">List of All Saved Lecturers
+                            <li class="breadcrumb-item active"><?php
+                                if($role == 'Admin'){ ?>
+                                
+                                    List of All Saved Lecturers <?php
+                                }else{ ?>
+                                    My Details  <?php
+                                } ?></a>
                             </li>
                         </ol>
                     </div>
@@ -74,7 +92,7 @@
                                                 <!-- <input type="text" name="password" value="<?php echo $userDetails['password'] ?>"> -->
 
                                                 <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
-                                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-user">UPDATE THE LECTURER</button>
+                                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-user">UPDATE THE DETAILS</button>
                                                 </div>
                                            
                                             
@@ -92,7 +110,15 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">List of All Saved Lecturers</h4>
+                                    <h4 class="card-title">
+                                        <?php
+                                        if(($role == 'Admin') OR ($role == 'Student')){ ?>
+                                        
+                                            List of All Saved Lecturers <?php
+                                        }else{ ?>
+                                            My Biodata  <?php
+                                        } ?>
+                                    </h4>
                                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -117,19 +143,47 @@
                                             </thead>
                                             <tbody><?php 
                                                 $num =1;
-                                                foreach($staff->getAllstaffs() as $staffs){ ?>
-                                                    <tr>
-                                                        <td><?php echo $num ?>
-                                                            <a href="delete-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-danger" onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a>
-                                                            <a href="edit-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-success" onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a>
-                                                        </td>
-                                                        <td><?php echo $staffs['staff_name'] ?></td>
-                                                        <td><?php echo $staffs['staff_email'] ?></td>
-                                                        <td><?php echo $staffs['staff_number'] ?></td>
-                                                        <td><?php echo $staffs['phone_number'] ?></td>
-                                                        
-                                                    </tr><?php 
-                                                    $num++; 
+                                                if(($role == 'Admin') OR ($role == 'Student')){
+                                                    foreach($staff->getAllstaffs() as $staffs){ ?>
+                                                        <tr>
+                                                            <td><?php echo $num;
+                                                                if($role == 'Admin'){ ?>
+                                                                    <a href="delete-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-danger" 
+                                                                    onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a>
+                                                                    <a href="edit-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-success" 
+                                                                    onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a><?php
+                                                                } ?>
+                                                            </td>
+                                                            <td><?php echo $staffs['staff_name'] ?></td>
+                                                            <td><?php echo $staffs['staff_email'] ?></td>
+                                                            <td><?php echo $staffs['staff_number'] ?></td>
+                                                            <td><?php echo $staffs['phone_number'] ?></td>
+                                                            
+                                                        </tr><?php 
+                                                        $num++; 
+                                                    } 
+                                                }else{
+                                                    $email = $_SESSION['user_name'];
+                                                    foreach($staff->getSingleStafEmail($email) as $staffs){ ?>
+                                                        <tr>
+                                                            <td><?php echo $num; 
+                                                                if($role == 'Admin'){ ?>
+                                                                    <a href="delete-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-danger" 
+                                                                    onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a><?php 
+                                                                } 
+                                                                if($role == 'Lecturer'){ ?>
+                                                                    <a href="edit-lecturer.php?staff_number=<?php echo $staffs['staff_number'] ?>" class="btn btn-success" 
+                                                                    onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a><?php 
+                                                                } ?>
+                                                            </td>
+                                                            <td><?php echo $staffs['staff_name'] ?></td>
+                                                            <td><?php echo $staffs['staff_email'] ?></td>
+                                                            <td><?php echo $staffs['staff_number'] ?></td>
+                                                            <td><?php echo $staffs['phone_number'] ?></td>
+                                                            
+                                                        </tr><?php 
+                                                        $num++; 
+                                                    } 
                                                 } ?>
                                                
                                                 

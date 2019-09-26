@@ -104,6 +104,15 @@
 			return $query->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function getSingleStafEmail($email)
+		{
+			$db = Database::getInstance()->getConnection();
+            $query = $db->prepare("SELECT * FROM staffs WHERE staff_email=:email");
+            $query->bindValue(":email", $email);
+			$query->execute();
+			return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         public function getSingleStaff($staff_number)
 		{
 			$db = Database::getInstance()->getConnection();

@@ -12,56 +12,78 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="./">Home</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="students.php">Students</a>
+                            <li class="breadcrumb-item"><a href="students.php"><?php
+                                if(($role == 'Admin') OR ($role == 'Lecturer')){ ?>
+                                
+                                   Students <?php
+                                }else{ ?>
+                                    My Details  <?php
+                                } ?></a>
                             </li>
-                            <li class="breadcrumb-item active">List of All Saved Students
+                            <li class="breadcrumb-item active"><?php
+                                if(($role == 'Admin') OR ($role == 'Lecturer')){ ?>
+                                
+                                    List of All Saved Students <?php
+                                }else{ ?>
+                                    My Biodata Information <?php
+                                } ?>
                             </li>
                         </ol>
                     </div>
                     </div>
                 </div>
             </div>
-            <div class="content-body"><!-- Stats -->
-                <section class="basic-elements">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Student Biodate Form</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        
-                                        <form action="process-student.php" method="POST" enctype="multipart/form-data">
-                                            <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
-                                                    <fieldset class="form-group">
-                                                        <label for="roundText">Select Excel File</label>
-                                                        <input type="file" id="roundText" class="form-control round" name="file" required>
-                                                    </fieldset>
-                                                </div>
-                                                
-                                                <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
-                                                <label for="roundText">Submit The Excel File</label>
-                                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-student">UPLOAD THE STUDENTS RECORD</button>
-                                                </div>
-                                           
-                                            
-                                            </div> 
-                                        </form>
+            <div class="content-body"><!-- Stats --><?php 
+                if($role == 'Admin'){ ?>
+                    <section class="basic-elements">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Student Biodate Form</h4>
                                     </div>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            
+                                            <form action="process-student.php" method="POST" enctype="multipart/form-data">
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                            <label for="roundText">Select Excel File</label>
+                                                            <input type="file" id="roundText" class="form-control round" name="file" required>
+                                                        </fieldset>
+                                                    </div>
+                                                    
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
+                                                    <label for="roundText">Submit The Excel File</label>
+                                                        <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-student">UPLOAD THE STUDENTS RECORD</button>
+                                                    </div>
+                                            
+                                                
+                                                </div> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
-                                
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section><?php 
+                } ?>
                 <section id="configuration">
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">List of All Saved Students</h4>
+                                    <h4 class="card-title">
+                                        <?php
+                                        if(($role == 'Admin') OR ($role == 'Lecturer')){ ?>
+                                        
+                                            List of All Saved Students <?php
+                                        }else{ ?>
+                                            My Biodata Information <?php
+                                        } ?>
+                                    </h4>
                                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -88,24 +110,45 @@
                                             </thead>
                                             <tbody><?php 
                                                 $num =1;
-                                                foreach($student->getAllstudents() as $students){ ?>
+                                                if(($role == 'Admin') OR ($role == 'Lecturer')){
+                                                    foreach($student->getAllstudents() as $students){ ?>
 
-                                                    <tr>
-                                                        <td><?php echo $num ?>
-                                                        <a href="delete-student.php?matric_number=<?php echo $students['matric_number'] ?>" class="btn btn-danger" 
-                                                            onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a>
-                                                        <!-- <a href="edit-student.php?matric_number=<?php echo $students['matric_number'] ?>" class="btn btn-success" 
-                                                            onclick="return(confirmToEdit());"><i class="fa fa-pencil"></i></a> -->
-                                                        </td>
-                                                        <td><?php echo $students['student_name']; ?></td>
-                                                        <td><?php echo $students['matric_number']; ?></td>
-                                                        <td><?php echo $students['student_email']; ?></td>
-                                                        <td><?php echo $students['phone_number']; ?></td>
-                                                        <td><?php echo $students['level']; ?></td>
-                                                        <td><?php echo $students['program']; ?></td>
-                                                        
-                                                    </tr><?php 
-                                                    $num++;
+                                                        <tr>
+                                                            <td><?php echo $num;
+                                                            if($role == 'Admin') { ?>
+
+                                                                <a href="delete-student.php?matric_number=<?php echo $students['matric_number'] ?>" class="btn btn-danger" 
+                                                                    onclick="return(confirmToDelete());"><i class="fa fa-trash-o"></i></a><?php
+                                                            } ?>
+                                                            </td>
+                                                            <td><?php echo $students['student_name']; ?></td>
+                                                            <td><?php echo $students['matric_number']; ?></td>
+                                                            <td><?php echo $students['student_email']; ?></td>
+                                                            <td><?php echo $students['phone_number']; ?></td>
+                                                            <td><?php echo $students['level']; ?></td>
+                                                            <td><?php echo $students['program']; ?></td>
+                                                            
+                                                        </tr><?php 
+                                                        $num++;
+                                                    }
+                                                }else{
+                                                    $email = $_SESSION['user_name'];
+                                                    foreach($student->getSingleStudentEmail($email) as $details){ ?>
+
+                                                        <tr>
+                                                            <td><?php echo $num ?>
+                                                           
+                                                            </td>
+                                                            <td><?php echo $details['student_name']; ?></td>
+                                                            <td><?php echo $details['matric_number']; ?></td>
+                                                            <td><?php echo $details['student_email']; ?></td>
+                                                            <td><?php echo $details['phone_number']; ?></td>
+                                                            <td><?php echo $details['level']; ?></td>
+                                                            <td><?php echo $details['program']; ?></td>
+                                                            
+                                                        </tr><?php 
+                                                        $num++;
+                                                    }
                                                 } ?>
                                                 
                                                 
