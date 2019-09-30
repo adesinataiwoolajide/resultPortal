@@ -31,14 +31,14 @@
                 $all_purpose->redirect("lecturers.php");
             }else{
                 $_SESSION['error']="Network Failure, Please Try Again Later";
-                $all_purpose->redirect("lecturer.php?staff_number=$staff_number");
+                $all_purpose->redirect("edit-lecturer.php?staff_number=$staff_number");
             }
             
         }else{
             $_SESSION['error']="Please FIll The Below Form To Update The User Details";
-            $all_purpose->redirect("lecturer.php?staff_number=$staff_number");
+            $all_purpose->redirect("edit-lecturer.php?staff_number=$staff_number");
         }
     }catch(PDOException $e){
         $_SESSION['error']= $e->getMessage();
-    	$all_purpose->redirect("lecturer.php?staff_number=$staff_number");
+    	$all_purpose->redirect("edit-lecturer.php?staff_number=$staff_number");
     }

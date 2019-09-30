@@ -6,7 +6,7 @@
     require('../Dev/autoload.php');
     
     $all_purpose = new all_purpose($db);
-    $course = new course();
+    $course = new Course();
 	try{
         $db = Database::getInstance()->getConnection();
         if(isset($_POST['add-course'])){

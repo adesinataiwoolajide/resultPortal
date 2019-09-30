@@ -63,8 +63,8 @@
                                                             <label for="roundText">Course Status</label>
                                                             
                                                             <select id="roundText" class="form-control round" name="status">
-                                                                <option> -- Select The Status -- </option>
-                                                                <option></option><?php
+                                                                <option value=""> -- Select The Status -- </option>
+                                                                <option value=""></option><?php
                                                                 $status = array('Core', 'Required', 'Elective'); 
                                                                 foreach($status as $positions){ ?>
                                                                     <option value="<?php echo $positions ?>"> <?php echo $positions ?>  </option><?php

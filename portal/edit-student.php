@@ -1,6 +1,10 @@
 <?php
     require_once('header.php');
     require_once('sidebar.php');
+    $matric_number = $_GET['matric_number'];
+    $myDetails = $student->getSingleStudent($matric_number);
+    $email = $myDetails['student_email'];
+    $details = $user::getSingleUser($email);
 ?>
     <div class="app-content content">
         <div class="content-wrapper">
@@ -12,6 +16,14 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="./">Home</a>
                             </li>
+                            <li class="breadcrumb-item"><a href="edit-student.php?matric_number=<?php echo $matric_number ?>"><?php
+                                if(($role == 'Admin')){ ?>
+                                
+                                   Edit Student <?php
+                                }else{ ?>
+                                    Edit My Details  <?php
+                                } ?></a>
+                            </li>
                             <li class="breadcrumb-item"><a href="students.php"><?php
                                 if(($role == 'Admin') OR ($role == 'Lecturer')){ ?>
                                 
@@ -21,9 +33,9 @@
                                 } ?></a>
                             </li>
                             <li class="breadcrumb-item active"><?php
-                                if(($role == 'Admin') OR ($role == 'Lecturer')){ ?>
+                                if(($role == 'Admin')){ ?>
                                 
-                                    List of All Saved Students <?php
+                                   Update <?php echo $matric_number ?> Data <?php
                                 }else{ ?>
                                     My Biodata Information <?php
                                 } ?>
@@ -34,29 +46,79 @@
                 </div>
             </div>
             <div class="content-body"><!-- Stats --><?php 
-                if($role == 'Admin'){ ?>
+                if(($role == 'Admin') OR ($role == 'Student')){ ?>
                     <section class="basic-elements">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Student Biodate Form</h4>
+                                        <h4 class="card-title">Edit Student Biodata Form</h4>
                                     </div>
                                     <div class="card-content">
                                         <div class="card-body">
                                             
-                                            <form action="process-student.php" method="POST" enctype="multipart/form-data">
+                                            <form action="update_student.php" method="POST" enctype="multipart/form-data">
                                                 <div class="row">
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
+                                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                                         <fieldset class="form-group">
-                                                            <label for="roundText">Select Excel File</label>
-                                                            <input type="file" id="roundText" class="form-control round" name="file" required>
+                                                            
+                                                            <input type="text" id="roundText" class="form-control round" name="student_name" 
+                                                            required placeholder="Enter Your FUll Name" value="<?php echo $myDetails['student_name'] ?>">
                                                         </fieldset>
                                                     </div>
+                                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                            
+                                                            <input type="text" id="roundText" class="form-control round" name="matric_number" 
+                                                            required value="<?php echo $matric_number ?>" readonly>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                           
+                                                            <input type="email" id="roundText" class="form-control round" name="student_email" required 
+                                                            value="<?php echo $myDetails['student_email'] ?>">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                            
+                                                            <input type="number" id="roundText" class="form-control round" name="phone_number" required
+                                                            value="<?php echo $myDetails['phone_number'] ?>">
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                            
+                                                            <select class="form-control round" name="level" required>
+                                                                <option value="<?php echo $myDetails['level'] ?>"><?php echo $myDetails['level'] ?> </option>
+                                                                <option value=""> </option>
+                                                                <option value="OND 1"> OND 1 </option>
+                                                                <option value="OND 2"> OND 2 </option>
+                                                                <option value="HND 1"> HND 1 </option>
+                                                                <option value="HND 2"> HND 2 </option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+
+                                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                                        <fieldset class="form-group">
+                                                            <select class="form-control round" name="program" required>
+                                                                <option value="<?php echo $myDetails['program'] ?>"><?php echo $myDetails['program'] ?> </option>
+                                                                <option value=""> </option>
+                                                                <option value="Daily PT"> Daily PT </option>
+                                                                <option value="Full TIme"> Full Time </option>
+                                                                
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <input type="hidden" name="user_id" value="<?php echo $details['user_id'] ?>">
                                                     
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 mb-1">
-                                                    <label for="roundText">Submit The Excel File</label>
-                                                        <button type="submit" class="btn btn-secondary btn-lg btn-block" name="add-student">UPLOAD THE STUDENTS RECORD</button>
+                                                    
+                                                    <div class="col-xl-12 col-lg-6 col-md-12 mb-1">
+                                                    
+                                                        <button type="submit" class="btn btn-secondary btn-lg btn-block" 
+                                                        name="update-student">UPDATE THE STUDENT RECORD</button>
                                                     </div>
                                             
                                                 
@@ -139,8 +201,8 @@
 
                                                         <tr>
                                                             <td><?php echo $num ?>
-                                                                <a href="edit-student.php?matric_number=<?php echo $details['matric_number'] ?>" class="btn btn-secondary" 
-                                                                    ><i class="fa fa-pencil"></i></a>
+                                                                <a href="edit-student.php?matric_number=<?php echo $students['matric_number'] ?>" class="btn btn-secondary" 
+                                                                        ><i class="fa fa-pencil"></i></a>
                                                             </td>
                                                             <td><?php echo $details['student_name']; ?></td>
                                                             <td><?php echo $details['matric_number']; ?></td>

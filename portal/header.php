@@ -11,7 +11,8 @@ if(!isset($_SESSION['id'])){
 	$course = new course();
 	$user = new User();
 	$staff = new Staff();
-	$student = new Student();
+  $student = new Student();
+  $allocation = new CourseAllocation();
 	$role = $_SESSION['role'];
 
 ?>

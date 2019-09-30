@@ -18,11 +18,12 @@
 
                 <li class=" nav-item"><a href="students.php"><i class="ft-users"></i><span class="menu-title" data-i18n="">STUDENTS</span></a>
                 </li>
+                <li class=" nav-item"><a href="course_allocation.php"><i class="ft-monitor"></i><span class="menu-title" data-i18n="">COURSE ALLOCATION</span></a>
+                </li>
+
                 <li class=" nav-item"><a href=""><i class="ft-users"></i><span class="menu-title" data-i18n=""> REGISTRATION </span></a>
                 </li>
                 
-                <li class=" nav-item"><a href=""><i class="ft-monitor"></i><span class="menu-title" data-i18n="">COURSE ALLOCATION</span></a>
-                </li>
                 <li class=" nav-item"><a href=""><i class="fa fa-certificate"></i><span class="menu-title" data-i18n="">RESULTS</span></a>
                 </li><?php
             }elseif($role == 'Lecturer'){ ?>
@@ -52,14 +53,9 @@
                 </li><?php
             } ?>
 
-           
-           
-            
             <li class=" nav-item"><a href="../log-out.php"><i class="fa fa-lock"></i><span class="menu-title" data-i18n="">LOG OUT</span></a>
             </li>
-          
-          
-          
+
         </ul>
     </div>
 </div>

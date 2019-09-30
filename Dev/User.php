@@ -31,7 +31,15 @@
         public function getAllUser()
 		{
 			$db = Database::getInstance()->getConnection();
-			$query = $db->prepare("SELECT * FROM administrator ORDER BY name ASC");
+			$query = $db->prepare("SELECT * FROM administrator WHERE role='Admin' ORDER BY name ASC");
+			$query->execute();
+			return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function getAlLect()
+		{
+			$db = Database::getInstance()->getConnection();
+			$query = $db->prepare("SELECT * FROM administrator WHERE role='Lecturer' ORDER BY name ASC");
 			$query->execute();
 			return $query->fetchAll(PDO::FETCH_ASSOC);
         }

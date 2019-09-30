@@ -16,8 +16,8 @@
                                         <i class="icon-camera font-large-2 white"></i>
                                     </div>
                                     <div class="p-2 bg-gradient-x-primary white media-body">
-                                        <h5>Products</h5>
-                                        <h5 class="text-bold-400 mb-0"><i class="ft-plus"></i> 28</h5>
+                                        <h5>USERS</h5>
+                                        <h5 class="text-bold-400 mb-0"><i class="ft-plus"></i> 0</h5>
                                     </div>
                                 </div>
                             </div>
@@ -31,8 +31,8 @@
                                         <i class="icon-user font-large-2 white"></i>
                                     </div>
                                     <div class="p-2 bg-gradient-x-danger white media-body">
-                                        <h5>New Users</h5>
-                                        <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i>1,238</h5>
+                                        <h5>STUDENTS</h5>
+                                        <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i>0</h5>
                                     </div>
                                 </div>
                             </div>
@@ -46,8 +46,8 @@
                                         <i class="icon-basket-loaded font-large-2 white"></i>
                                     </div>
                                     <div class="p-2 bg-gradient-x-warning white media-body">
-                                        <h5>New Orders</h5>
-                                        <h5 class="text-bold-400 mb-0"><i class="ft-arrow-down"></i> 4,658</h5>
+                                        <h5>COURSES</h5>
+                                        <h5 class="text-bold-400 mb-0"><i class="ft-arrow-down"></i> 0</h5>
                                     </div>
                                 </div>
                             </div>
@@ -61,8 +61,8 @@
                                         <i class="icon-wallet font-large-2 white"></i>
                                     </div>
                                     <div class="p-2 bg-gradient-x-success white media-body">
-                                        <h5>Total Profit</h5>
-                                        <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i> 5.6 M</h5>
+                                        <h5>LECTURER</h5>
+                                        <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i>0</h5>
                                     </div>
                                 </div>
                             </div>
@@ -78,8 +78,8 @@
                                         <i class="icon-camera font-large-2 white"></i>
                                     </div>
                                     <div class="p-2 bg-gradient-x-primary white media-body">
-                                        <h5>Products</h5>
-                                        <h5 class="text-bold-400 mb-0"><i class="ft-plus"></i> 28</h5>
+                                        <h5>COURSE ALLOCATION</h5>
+                                        <h5 class="text-bold-400 mb-0"><i class="ft-plus"></i> 0</h5>
                                     </div>
                                 </div>
                             </div>
@@ -93,8 +93,8 @@
                                         <i class="icon-user font-large-2 white"></i>
                                     </div>
                                     <div class="p-2 bg-gradient-x-danger white media-body">
-                                        <h5>New Users</h5>
-                                        <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i>1,238</h5>
+                                        <h5>STUDENT REGISTRATION</h5>
+                                        <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i>0</h5>
                                     </div>
                                 </div>
                             </div>
@@ -135,9 +135,7 @@
         </div>
     </div>
 <?php
-
     require_once('footer.php');
-
 ?>
 
 

@@ -38,26 +38,30 @@
                                                     <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                         <fieldset class="form-group">
                                                             <label for="roundText">Full Name</label>
-                                                            <input type="text" id="roundText" class="form-control round" name="name" placeholder="Enter The Full Name" required>
+                                                            <input type="text" id="roundText" class="form-control round" name="name"
+                                                             placeholder="Enter The Full Name" required>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                         <fieldset class="form-group">
                                                             <label for="roundText">E-Mail</label>
-                                                            <input type="email" id="roundText" class="form-control round" placeholder="Enter The E-mail" name="email" required>
+                                                            <input type="email" id="roundText" class="form-control round" 
+                                                            placeholder="Enter The E-mail" name="email" required>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                         <fieldset class="form-group">
                                                             <label for="roundText">Password</label>
-                                                            <input type="password" id="roundText" class="form-control round" name="password" placeholder="Enter The Password" 
+                                                            <input type="password" id="roundText" class="form-control round"
+                                                             name="password" placeholder="Enter The Password" 
                                                             required>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
                                                         <fieldset class="form-group">
                                                             <label for="roundText">Repeat Password</label>
-                                                            <input type="password" id="roundText" class="form-control round" placeholder="Repeat Password" required name="repeat">
+                                                            <input type="password" id="roundText" class="form-control round" 
+                                                            placeholder="Repeat Password" required name="repeat">
                                                         </fieldset>
                                                     </div>
 

@@ -1,5 +1,11 @@
 <?php 
     session_start();
+	require("Dev/general/all_purpose_class.php");
+	require('Dev/autoload.php');
+    require('Dev/Database.php');
+    $user = new User ();
+    $email = $_GET['email'];
+    $details = $user::getSingleUser($email);
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -10,7 +16,7 @@
     <meta name="description" content="Stack admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, stack admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>TOPS RESULT PORTAL | LOGIN</title>
+    <title>TOPS RESULT PORTAL | UPDATE PASSWORD</title>
     <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
@@ -52,33 +58,36 @@
                                 </div>
                                 <div class="card-content">
                                    <div class="card-body">
-                                        <form class="form-horizontal" action="process-login.php"  method="POST">
+                                        <form class="form-horizontal" action="update-account.php" novalidate method="POST">
                                             <fieldset class="form-group position-relative has-icon-left">
-                                                <input type="email" name="email" class="form-control" id="user-name"
-                                                 placeholder="Your Username" required>
+                                                <input type="email" name="email" class="form-control" id="user-name" 
+                                                placeholder="Your Username" value="<?php echo $details['email'] ?>" readonly>
                                                 <div class="form-control-position">
                                                     <i class="ft-user"></i>
                                                 </div>
                                             </fieldset>
                                             <fieldset class="form-group position-relative has-icon-left">
-                                                <input type="password" class="form-control" name="password" id="user-password" 
-                                                placeholder="Enter Password" required>
+                                                <input type="text" name="name" class="form-control" id="user-name" value="<?php echo $details['name'] ?>"
+                                                placeholder="Your Username" required>
+                                                <div class="form-control-position">
+                                                    <i class="fa fa-envelope"></i>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="form-group position-relative has-icon-left">
+                                                <input type="password" class="form-control" name="password" id="user-password" placeholder="Enter Password" required>
                                                 <div class="form-control-position">
                                                     <i class="fa fa-key"></i>
                                                 </div>
                                             </fieldset>
                                             <div class="form-group row">
-                                                <div class="col-md-6 col-12 text-center text-sm-left">
-                                                    <fieldset>
-                                                        <input type="checkbox" id="remember-me" class="chk-remember">
-                                                        <label for="remember-me"> Remember Me</label>
-                                                    </fieldset>
+                                                <div class="col-md-6 col-12 float-sm-left text-center text-sm-left">
+                                                    <a href="./" class="card-link">Login</a>
                                                 </div>
                                                 <div class="col-md-6 col-12 float-sm-left text-center text-sm-right">
                                                     <a href="forgot-password.php" class="card-link">Forgot Password ?</a>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-secondary btn-block" name="login"><i class="ft-unlock"></i> Login</button>
+                                            <button type="submit" class="btn btn-secondary btn-block" name="update-user"><i class="ft-unlock"></i> Update Password</button>
                                         </form>
                                     </div>
                                     <!-- <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"><span>DO not have an account ?</span></p>

@@ -68,7 +68,7 @@
 
 			}else{
 				$_SESSION['error'] = "Your are an Invalid User";
-				$this->redirect(".././");
+				$this->redirect("./");
 			}
 			return $access;
 		}

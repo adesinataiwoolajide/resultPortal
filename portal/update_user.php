@@ -32,14 +32,14 @@
                 $all_purpose->redirect("users.php");
             }else{
                 $_SESSION['error']="Network Failure, Please Try Again Later";
-                $all_purpose->redirect("users.php");
+                $all_purpose->redirect("edit-user.php?email=$email");
             }
             
         }else{
             $_SESSION['error']="Please FIll The Below Form To Update The User Details";
-            $all_purpose->redirect("users.php");
+            $all_purpose->redirect("edit-user.php?email=$email");
         }
     }catch(PDOException $e){
         $_SESSION['error']= $e->getMessage();
-    	$all_purpose->redirect("users.php");
+    	$all_purpose->redirect("edit-user.php?email=$email");
     }

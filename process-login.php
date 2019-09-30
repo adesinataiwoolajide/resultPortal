@@ -9,7 +9,6 @@
 		if(isset($_POST['login'])){
 			$email = $all_purpose->sanitizeInput($_POST['email']);
 			$password = sha1($_POST['password']);
-
 			
 			$query = $db->prepare("SELECT * FROM administrator  WHERE email =:email AND password =:password");
 			$arr=array(':email'=>$email, ':password'=>$password);
